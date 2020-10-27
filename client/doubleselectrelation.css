@@ -1,0 +1,63 @@
+.doubleselect {
+
+}
+.field-doubleselectrelation .selector{
+    display: flex;
+    flex-direction: row;
+}
+.field-doubleselectrelation .selector-chosen,
+.field-doubleselectrelation .selector-available{
+    flex:1;
+    margin: 0 5px 5px 0;
+}
+
+.field-doubleselectrelation .selector-chooser {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    flex-direction: column;
+}
+
+.field-doubleselectrelation .dsr-actions {
+    padding:  10px 0;
+}
+.field-doubleselectrelation .dsr-add,
+.field-doubleselectrelation .dsr-remove-all {
+    float:right;
+    margin-right: 0;
+}
+.field-doubleselectrelation ul{
+    overflow-y: scroll;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 1px solid black;
+    height: 250px;
+    min-width: 250px;
+    background: #fff;
+
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+.field-doubleselectrelation ul li {
+    display: block;
+    cursor: pointer;
+    padding: 3px 5px;
+
+}
+.field-doubleselectrelation ul li.selected {
+    background: blue;
+    color: #fff;
+}
+.field-doubleselectrelation .selector-filter {
+
+}
+.field-doubleselectrelation .selector-filter input {
+    width: 100%;
+}

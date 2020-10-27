@@ -1,0 +1,5 @@
+SilverStripe\Admin\LeftAndMain:
+  extra_requirements_css:
+    - 'gurucomkz/doubleselectrelation:client/doubleselectrelation.css'
+  extra_requirements_javascript:
+    - 'gurucomkz/doubleselectrelation:client/doubleselectrelation.js'
