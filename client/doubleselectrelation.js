@@ -1,5 +1,4 @@
 jQuery.entwine('ss', function($) {
-
     $('.field-doubleselectrelation').entwine({
         onmatch: function(e) {
             var dsr = $(this),
@@ -36,7 +35,7 @@ jQuery.entwine('ss', function($) {
                 btnSelectAll.attr('disabled',false);
             }
             btnRemoveAll.click(function(){
-                deselectSome(chosen.find('li'));
+                deselectSome(chosen.find('li:visible'));
             });
             btnSelectOne.click(function(){
                 selectSome(available.find('li.selected'));
@@ -45,7 +44,7 @@ jQuery.entwine('ss', function($) {
                 deselectSome(chosen.find('li.selected'));
             });
             btnSelectAll.click(function(){
-                selectSome(available.find('li'));
+                selectSome(available.find('li:visible'));
             });
             dsr.find('ul li').click(function(e){
                 var li = $(this), all = li.parent().find('li');
@@ -123,5 +122,4 @@ jQuery.entwine('ss', function($) {
             btnRemoveAll.attr('disabled',!chosen.find('li').length);
         }
     });
-
 });
