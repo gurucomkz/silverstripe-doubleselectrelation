@@ -15,6 +15,10 @@ use SilverStripe\View\ArrayData;
 class DoubleSelectRelation extends MultiSelectField
 {
     private $titleField = 'Title';
+    private static $default_classes = [
+        'stacked',
+    ];
+
     public function getTitleField()
     {
         return $this->titleField;

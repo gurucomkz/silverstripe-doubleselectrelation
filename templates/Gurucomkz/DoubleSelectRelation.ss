@@ -6,11 +6,11 @@
         <div class="selector-available">
             <h2>Available</h2>
             <div class="selector-filter">
-                <input type="text" placeholder="Filter Available">
+                <input type="text" class="text" placeholder="Filter Available">
             </div>
-            <ul class="dsr-available">
+            <ul class="dsr-available form-control">
                 <% loop $Options %><% if not $isChecked %>
-                <li data-value="$Value">$Title</li>
+                <li data-value="$Value"><span>$Title</span></li>
                 <% end_if %><% end_loop %>
             </ul>
             <div class="dsr-actions">
@@ -21,11 +21,11 @@
         <div class="selector-chosen">
             <h2>Chosen</h2>
             <div class="selector-filter">
-                <input type="text" placeholder="Filter Chosen">
+                <input type="text" class="text" placeholder="Filter Chosen">
             </div>
-            <ul class="dsr-chosen">
+            <ul class="dsr-chosen form-control">
                 <% loop $Options %><% if $isChecked %>
-                <li data-value="$Value">$Title</li>
+                <li data-value="$Value"><span>$Title</span></li>
                 <% end_if %><% end_loop %>
             </ul>
             <div class="dsr-actions">

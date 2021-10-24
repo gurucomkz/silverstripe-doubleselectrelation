@@ -48,12 +48,13 @@
 .field-doubleselectrelation ul li {
     display: block;
     cursor: pointer;
-    padding: 3px 5px;
-
+    padding: 5px 5px;
+    position: relative;
+    border-bottom: 1px dotted silver;
 }
 .field-doubleselectrelation ul li.selected {
-    background: blue;
-    color: #fff;
+    background: #ebeef2;
+    color: #566b8d;
 }
 .field-doubleselectrelation .selector-filter {
 
