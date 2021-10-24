@@ -19,9 +19,15 @@ $offersList = Offers::get();
 $offersSelector = DoubleSelectRelation::create('Offers', null, $offersList);
 $fields->addFieldToTab('Root.Main', $offersSelector);
 ```
+### Select custom Title
+
+Declare a field (i.e. `LongTitle`) or a getter (i.e. `getLongTitle()`) in your model and do like this:
+```php
+DoubleSelectRelation::create('Offers', null, $offersList)
+    ->setTitleField('LongTitle');
+```
 
 ## TODO
 
-* Auto-discovery of the relation options
 * Checks for changes and reporting to the form to trigger "Save" button activation
 * Some API maybe for programmatic control over options?

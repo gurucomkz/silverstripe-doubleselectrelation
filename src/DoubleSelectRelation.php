@@ -9,7 +9,28 @@ use SilverStripe\Forms\MultiSelectField;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\View\ArrayData;
 
-class DoubleSelectRelation extends MultiSelectField {
+/**
+ * @method DataList getSource()
+ */
+class DoubleSelectRelation extends MultiSelectField
+{
+    private $titleField = 'Title';
+    public function getTitleField()
+    {
+        return $this->titleField;
+    }
+
+    public function setTitleField($value)
+    {
+        $this->titleField = $value;
+        return $this;
+    }
+
+    public function setSource($source)
+    {
+        $this->source = $source;
+        return $this;
+    }
 
     /**
      * @todo Explain different source data that can be used with this field,
@@ -42,7 +63,11 @@ class DoubleSelectRelation extends MultiSelectField {
         $odd = false;
         $formID = $this->ID();
         $options = new ArrayList();
-        foreach ($this->getSource() as $itemValue => $title) {
+        foreach ($this->getSource() as $relatedObject) {
+            /** @var DataObject $relatedObject */
+            $itemValue = $relatedObject->ID;
+            $title = $relatedObject->{$this->titleField};
+            
             $itemID = Convert::raw2htmlid("{$formID}_{$itemValue}");
             $odd = !$odd;
             $extraClass = $odd ? 'odd' : 'even';
