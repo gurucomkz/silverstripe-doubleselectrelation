@@ -3,10 +3,22 @@
 
 namespace Gurucomkz;
 
+use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Core\Convert;
+use SilverStripe\Forms\CompositeField;
+use SilverStripe\Forms\FieldGroup;
+use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\Form;
 use SilverStripe\Forms\FormField;
+use SilverStripe\Forms\GridField\GridField;
+use SilverStripe\Forms\GridField\GridFieldButtonRow;
+use SilverStripe\Forms\GridField\GridFieldFilterHeader;
+use SilverStripe\Forms\GridField\GridFieldPageCount;
+use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
 use SilverStripe\Forms\MultiSelectField;
 use SilverStripe\ORM\ArrayList;
+use SilverStripe\ORM\DataList;
+use SilverStripe\ORM\DataObject;
 use SilverStripe\View\ArrayData;
 
 /**
@@ -14,10 +26,90 @@ use SilverStripe\View\ArrayData;
  */
 class DoubleSelectRelation extends MultiSelectField
 {
+    private static $allowed_actions = [
+        'preview',
+    ];
+
+    private static $url_handlers = [
+        '$Action!/$ID' => '$Action'
+    ];
+
     private $titleField = 'Title';
+    private $allowPreview = false;
+
     private static $default_classes = [
         'stacked',
     ];
+
+    public function preview(HTTPRequest $request)
+    {
+        /** @var DataObject */
+        $object = $this->getSource()->byID($request->latestParam('ID'));
+        $form = $this->ItemEditForm($object);
+        return $form;
+    }
+
+    private function ItemEditForm(DataObject $record)
+    {
+        if (!$record->canView()) {
+            return  _t(
+                __CLASS__ . '.ViewPermissionsFailure',
+                'It seems you don\'t have the necessary permissions to view "{ObjectTitle}"',
+                ['ObjectTitle' => $record->singular_name()]
+            );
+        }
+
+        $fields = $record->hasMethod('getPreviewCMSFields') ? $record->getPreviewCMSFields() : $record->getCMSFields();
+        $fields->makeReadonly();
+        $this->fixGridFields($fields);
+
+        $form = new Form(
+            $this,
+            'ItemEditForm',
+            $fields,
+            FieldList::create()
+        );
+
+        $form->loadDataFrom($record);
+        $form->makeReadonly();
+        $form->setFormAction('nada');
+        $form->setRequestHandler(new DummyRequestHandler($form));
+        $form->setStrictFormMethodCheck(false);
+        $form->disableSecurityToken();
+
+
+        // Always show with base template (full width, no other panels),
+        // regardless of overloaded CMS controller templates.
+        // TODO Allow customization, e.g. to display an edit form alongside a search form from the CMS controller
+        $form->setTemplate([
+            'type' => 'Includes',
+            'SilverStripe\\Admin\\LeftAndMain_EditForm',
+        ]);
+        $form->addExtraClass('cms-content cms-edit-form center fill-height flexbox-area-grow');
+        $form->setAttribute('data-pjax-fragment', 'CurrentForm Content');
+        if ($form->Fields()->hasTabSet()) {
+            $form->Fields()->findOrMakeTab('Root')->setTemplate('SilverStripe\\Forms\\CMSTabSet');
+            $form->addExtraClass('cms-tabset');
+        }
+
+        return $form->forTemplate();
+    }
+
+    private function fixGridFields(FieldList $fields)
+    {
+        foreach ($fields as $field) {
+            if ($field instanceof CompositeField) {
+                $this->fixGridFields($field->getChildren());
+            }
+            if ($field instanceof GridField) {
+                $field->getConfig()
+                    ->removeComponentsByType(GridFieldPageCount::class)
+                    ->removeComponentsByType(GridFieldButtonRow::class)
+                    ->removeComponentsByType(GridFieldToolbarHeader::class)
+                    ->removeComponentsByType(GridFieldFilterHeader::class);
+            }
+        }
+    }
 
     public function getTitleField()
     {
@@ -27,6 +119,17 @@ class DoubleSelectRelation extends MultiSelectField
     public function setTitleField($value)
     {
         $this->titleField = $value;
+        return $this;
+    }
+
+    public function getAllowPreview()
+    {
+        return $this->allowPreview;
+    }
+
+    public function setAllowPreview($value)
+    {
+        $this->allowPreview = !!$value;
         return $this;
     }
 
@@ -112,5 +215,15 @@ class DoubleSelectRelation extends MultiSelectField
         unset($attributes['required']);
         unset($attributes['aria-required']);
         return $attributes;
+    }
+
+    public function getDataClass()
+    {
+        return $this->getSource()->dataClass();
+    }
+
+    public function getDataTitle()
+    {
+        return singleton($this->getDataClass())->singular_name();
     }
 }

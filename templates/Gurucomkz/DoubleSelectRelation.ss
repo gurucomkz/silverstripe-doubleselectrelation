@@ -1,4 +1,4 @@
-<div class="field-doubleselectrelation" data-fieldname="$Name[]">
+<div class="field-doubleselectrelation" data-fieldname="$Name[]" <% if $AllowPreview %>data-preview="$Link('preview')"<% end_if %>>
 
     <p class="help"> Hold down "Control", or "Command" on a Mac, to select more than one.</p>
 
@@ -38,4 +38,16 @@
     <input type="hidden" class="dsr-input" name="$Up.Name[]" value="$Value">
     <% end_if %><% end_loop %>
 
+    <div class="DSRPreviewModal modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">$DataTitle Preview</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

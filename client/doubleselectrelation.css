@@ -1,6 +1,21 @@
 .doubleselect {
 
 }
+.DSRPreviewModal {
+    pointer-events: none;
+}
+.DSRPreviewModal .modal-body {
+    padding:0;
+    display: flex;
+    flex-direction: column;
+    overflow-y: hidden;
+}
+.DSRPreviewModal .modal-dialog {
+    max-width: 900px;
+}
+.DSRPreviewModal.show{
+    display: block;
+}    
 .field-doubleselectrelation .selector{
     display: flex;
     flex-direction: row;
@@ -51,6 +66,16 @@
     padding: 5px 5px;
     position: relative;
     border-bottom: 1px dotted silver;
+}
+.field-doubleselectrelation[data-preview] ul li {
+    min-height: 41px;
+}
+.field-doubleselectrelation[data-preview] ul li>span {
+    display: inline-block;
+    width: calc(100% - 50px);
+}
+.field-doubleselectrelation .selector li button {
+    float: right;
 }
 .field-doubleselectrelation ul li.selected {
     background: #ebeef2;

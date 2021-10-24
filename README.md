@@ -27,6 +27,16 @@ DoubleSelectRelation::create('Offers', null, $offersList)
     ->setTitleField('LongTitle');
 ```
 
+### Enable preview 
+
+You may want to let users check out the options before working with them. It can be done like this:
+```php
+DoubleSelectRelation::create('Offers', null, $offersList)
+    ->setAllowPreview(true);
+```
+It will create a button in every line, which by clicking will display a readonly CMS form in a modal box.
+
+Additionally, you can declare method `getPreviewCMSFields()` in your related model to make a totally custom preview form.
 ## TODO
 
 * Checks for changes and reporting to the form to trigger "Save" button activation

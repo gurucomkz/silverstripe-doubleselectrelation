@@ -1,13 +1,16 @@
 jQuery.entwine('ss', function($) {
     $('.field-doubleselectrelation').entwine({
         onmatch: function(e) {
-            var dsr = $(this),
+            var me = this,
+                dsr = $(this),
                 btnRemoveAll = dsr.find('.dsr-remove-all'),
                 btnRemoveOne = dsr.find('.dsr-remove'),
                 btnSelectAll = dsr.find('.dsr-chooseall'),
                 btnSelectOne = dsr.find('.dsr-add'),
                 chosen = dsr.find('.dsr-chosen'),
                 available = dsr.find('.dsr-available'),
+                canPreview = dsr.attr('data-preview'),
+                previewModal = dsr.find('.DSRPreviewModal'),
                 searchMap = {},
                 inputName = dsr.attr('data-fieldname');
             var selectSome = function(list){
@@ -95,6 +98,21 @@ jQuery.entwine('ss', function($) {
                 }
                 li.data('helper', helper);
                 searchMap[val] = helper;
+                if (canPreview) {
+                    var btn = $('<button class="btn btn-outline-secondary pull-right"><span class="font-icon-search"></span></button>');
+                    btn.click(function(e){
+                        e.preventDefault();
+                        var url = canPreview + '/' + val;
+                        $.ajax({
+                            url:url, 
+                            success: function(data){
+                                previewModal.find('.modal-body').html(data);
+                                me.openmodal(previewModal);
+                            }});
+                        return false;
+                    });
+                    btn.appendTo(li);
+                }
             });
 
             dsr.find('.selector-filter').keyup(function(){
@@ -120,6 +138,31 @@ jQuery.entwine('ss', function($) {
             btnRemoveOne.attr('disabled',!chosen.find('li.selected').length);
             btnSelectAll.attr('disabled',!available.find('li').length);
             btnRemoveAll.attr('disabled',!chosen.find('li').length);
+        },
+        openmodal: function(modal){
+            modal.appendTo(document.body);
+            var backdrop=$(".modal-backdrop");
+            if(backdrop.length<1){
+                backdrop = $('<div class="modal-backdrop fade"></div>');
+                backdrop.appendTo(document.body);
+            }
+            function t(){
+                backdrop.removeClass("show"),
+                modal.removeClass("show"),
+                setTimeout(function(){backdrop.remove()},150)
+            }
+            modal.find("[data-dismiss]")
+                .add(".modal-backdrop")
+                .on("click",function(){t()});
+            $(document).on("keydown",function(e){
+                if(27===e.keyCode){
+                    t()
+                }
+            });
+            setTimeout(function(){
+                backdrop.addClass("show");
+                modal.addClass("show");
+            },0);
         }
     });
 });
