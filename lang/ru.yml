@@ -1,0 +1,16 @@
+ru:
+  Gurucomkz\DoubleSelectRelation:
+    Available: Доступно
+    Choose: Выбрать
+    ChooseAll: 'Выбрать все'
+    ChooseAllNote: 'Нажмите, чтобы добавить все видимые в левом списке'
+    Chosen: Выбранные
+    Close: Закрыть
+    FilterAvailable: 'Фильтровать доступные'
+    FilterChosen: 'Фильтровать выбранные'
+    Instructions: 'Удерживайте "Ctrl" (или "Command" на Mac) для выбора нескольких элементов'
+    Preview: Предпросмотр
+    Remove: Убрать
+    RemoveAll: 'Убрать все'
+    RemoveAllNote: 'Нажмите сюда чтобы убрать все'
+    ViewPermissionsFailure: 'Кажется, у вас нет необходимых привилегий для предпросмотра "{ObjectTitle}"'

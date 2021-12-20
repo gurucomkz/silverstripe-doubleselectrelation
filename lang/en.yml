@@ -1,0 +1,16 @@
+en:
+  Gurucomkz\DoubleSelectRelation:
+    Available: Available
+    Choose: Choose
+    ChooseAll: 'Choose all'
+    ChooseAllNote: 'Click to choose all items at once'
+    Chosen: Chosen
+    Close: Close
+    FilterAvailable: 'Filter Available'
+    FilterChosen: 'Filter Chosen'
+    Instructions: 'Hold down "Control", or "Command" on a Mac, to select more than one.'
+    Preview: Preview
+    Remove: Remove
+    RemoveAll: 'Remove all'
+    RemoveAllNote: 'Click to remove all chosen items at once'
+    ViewPermissionsFailure: 'It seems you don''t have the necessary permissions to view "{ObjectTitle}"'
