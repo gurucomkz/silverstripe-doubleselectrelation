@@ -1,12 +1,14 @@
 <div class="field-doubleselectrelation" data-fieldname="$Name[]" <% if $AllowPreview %>data-preview="$Link('preview')"<% end_if %>>
 
-    <p class="help"> Hold down "Control", or "Command" on a Mac, to select more than one.</p>
+    <p class="help">
+        <%t Gurucomkz\\DoubleSelectRelation.Instructions 'Hold down "Control", or "Command" on a Mac, to select more than one.' %>
+    </p>
 
     <div class="selector">
         <div class="selector-available">
-            <h2>Available</h2>
+            <h2><%t Gurucomkz\\DoubleSelectRelation.Available 'Available' %></h2>
             <div class="selector-filter">
-                <input type="text" class="text" placeholder="Filter Available">
+                <input type="text" class="text" placeholder="<%t Gurucomkz\\DoubleSelectRelation.FilterAvailable 'Filter Available' %>">
             </div>
             <ul class="dsr-available form-control">
                 <% loop $Options %><% if not $isChecked %>
@@ -14,14 +16,14 @@
                 <% end_if %><% end_loop %>
             </ul>
             <div class="dsr-actions">
-                <button title="Click to choose all Applicable $Title at once." class="btn btn-outline-primary font-icon-tick dsr-chooseall">Choose all</button>
-                <button title="Choose" class="btn btn-primary font-icon-plus  dsr-add">Choose</button>
+                <button title="<%t Gurucomkz\\DoubleSelectRelation.ChooseAllNote 'Click to choose all items at once' %>" class="btn btn-outline-primary font-icon-tick dsr-chooseall"><%t Gurucomkz\\DoubleSelectRelation.ChooseAll 'Choose all' %></button>
+                <button title="<%t Gurucomkz\\DoubleSelectRelation.Choose 'Choose' %>" class="btn btn-primary font-icon-plus  dsr-add"><%t Gurucomkz\\DoubleSelectRelation.Choose 'Choose' %></button>
             </div>
         </div>
         <div class="selector-chosen">
-            <h2>Chosen</h2>
+            <h2><%t Gurucomkz\\DoubleSelectRelation.Chosen 'Chosen' %></h2>
             <div class="selector-filter">
-                <input type="text" class="text" placeholder="Filter Chosen">
+                <input type="text" class="text" placeholder="<%t Gurucomkz\\DoubleSelectRelation.FilterChosen 'Filter Chosen' %>">
             </div>
             <ul class="dsr-chosen form-control">
                 <% loop $Options %><% if $isChecked %>
@@ -29,8 +31,16 @@
                 <% end_if %><% end_loop %>
             </ul>
             <div class="dsr-actions">
-                <button title="Remove" class="btn btn-danger font-icon-minus dsr-remove">Remove</button>
-                <button title="Click to remove all chosen Applicable $Title at once." class="btn btn-outline-danger font-icon-trash-bin dsr-remove-all">Remove all</button>
+                <button 
+                    title="<%t Gurucomkz\\DoubleSelectRelation.Remove 'Remove' %>" 
+                    class="btn btn-danger font-icon-minus dsr-remove">
+                    <%t Gurucomkz\\DoubleSelectRelation.Remove 'Remove' %>
+                </button>
+                <button 
+                    title="<%t Gurucomkz\\DoubleSelectRelation.RemoveAllNote 'Click to remove all chosen items at once' %>" 
+                    class="btn btn-outline-danger font-icon-trash-bin dsr-remove-all">
+                    <%t Gurucomkz\\DoubleSelectRelation.RemoveAll 'Remove all' %>
+                </button>
             </div>
         </div>
     </div>
@@ -42,8 +52,8 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">$DataTitle Preview</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h5 class="modal-title" id="exampleModalLabel"><%t Gurucomkz\\DoubleSelectRelation.Preview 'Preview' %></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="<%t Gurucomkz\\DoubleSelectRelation.Close 'Close' %>"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
                 </div>
