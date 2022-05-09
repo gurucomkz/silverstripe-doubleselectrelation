@@ -8,7 +8,7 @@
         <div class="selector-available">
             <h2><%t Gurucomkz\\DoubleSelectRelation.Available 'Available' %></h2>
             <div class="selector-filter">
-                <input type="text" class="text" placeholder="<%t Gurucomkz\\DoubleSelectRelation.FilterAvailable 'Filter Available' %>">
+                <input type="text" class="text" placeholder="<%t Gurucomkz\\DoubleSelectRelation.FilterAvailable 'Filter Available' %>" autocomplete="off">
             </div>
             <ul class="dsr-available form-control">
                 <% loop $Options %><% if not $isChecked %>
@@ -16,14 +16,14 @@
                 <% end_if %><% end_loop %>
             </ul>
             <div class="dsr-actions">
-                <button title="<%t Gurucomkz\\DoubleSelectRelation.ChooseAllNote 'Click to choose all items at once' %>" class="btn btn-outline-primary font-icon-tick dsr-chooseall"><%t Gurucomkz\\DoubleSelectRelation.ChooseAll 'Choose all' %></button>
-                <button title="<%t Gurucomkz\\DoubleSelectRelation.Choose 'Choose' %>" class="btn btn-primary font-icon-plus  dsr-add"><%t Gurucomkz\\DoubleSelectRelation.Choose 'Choose' %></button>
+                <button type="button" title="<%t Gurucomkz\\DoubleSelectRelation.ChooseAllNote 'Click to choose all items at once' %>" class="btn btn-outline-primary font-icon-tick dsr-chooseall"><%t Gurucomkz\\DoubleSelectRelation.ChooseAll 'Choose all' %></button>
+                <button type="button" title="<%t Gurucomkz\\DoubleSelectRelation.Choose 'Choose' %>" class="btn btn-primary font-icon-plus  dsr-add"><%t Gurucomkz\\DoubleSelectRelation.Choose 'Choose' %></button>
             </div>
         </div>
         <div class="selector-chosen">
             <h2><%t Gurucomkz\\DoubleSelectRelation.Chosen 'Chosen' %></h2>
             <div class="selector-filter">
-                <input type="text" class="text" placeholder="<%t Gurucomkz\\DoubleSelectRelation.FilterChosen 'Filter Chosen' %>">
+                <input type="text" class="text" placeholder="<%t Gurucomkz\\DoubleSelectRelation.FilterChosen 'Filter Chosen' %>" autocomplete="off">
             </div>
             <ul class="dsr-chosen form-control">
                 <% loop $Options %><% if $isChecked %>
@@ -31,12 +31,14 @@
                 <% end_if %><% end_loop %>
             </ul>
             <div class="dsr-actions">
-                <button 
+                <button
+                    type="button" 
                     title="<%t Gurucomkz\\DoubleSelectRelation.Remove 'Remove' %>" 
                     class="btn btn-danger font-icon-minus dsr-remove">
                     <%t Gurucomkz\\DoubleSelectRelation.Remove 'Remove' %>
                 </button>
                 <button 
+                    type="button"
                     title="<%t Gurucomkz\\DoubleSelectRelation.RemoveAllNote 'Click to remove all chosen items at once' %>" 
                     class="btn btn-outline-danger font-icon-trash-bin dsr-remove-all">
                     <%t Gurucomkz\\DoubleSelectRelation.RemoveAll 'Remove all' %>
