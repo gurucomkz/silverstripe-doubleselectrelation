@@ -111,6 +111,17 @@ class DoubleSelectRelation extends MultiSelectField
         }
     }
 
+    /**
+     * Retrieve all values in the source array
+     *
+     * @return array
+     */
+    protected function getSourceValues()
+    {
+        $map = $this->getListMap($this->getSource());
+        return array_keys($map ?? []);
+    }
+
     public function getTitleField()
     {
         return $this->titleField;
